@@ -33,7 +33,3 @@ def check_phishing(url):
 
     return True, "Ссылка безопасна."
 
-# Пример использования
-url = "https://example.com"
-is_safe, message = check_phishing(url)
-print(is_safe, message)
