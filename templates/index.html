@@ -4,31 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проверка безопасности ссылки</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        h1 { text-align: center; }
-        .form-container { max-width: 600px; margin: 0 auto; }
-        .input-field { width: 100%; padding: 10px; font-size: 16px; }
-        .result { padding: 15px; margin-top: 20px; border-radius: 5px; }
-        .safe { background-color: #d4edda; color: #155724; }
-        .unsafe { background-color: #f8d7da; color: #721c24; }
-        .button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 5px; }
-    </style>
+    <!-- Подключаем внешний CSS файл -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>Проверка безопасности ссылки</h1>
-    <div class="form-container">
+    <div class="container">
+        <h1 class="title">Проверка безопасности ссылки</h1>
         <form method="POST">
-            <input type="text" name="url" class="input-field" placeholder="Введите ссылку для проверки" required value="{{ url }}">
-            <button type="submit" class="button">Проверить</button>
+            <div class="form-group">
+                <input type="text" name="url" class="form-control" placeholder="Введите ссылку для проверки" required value="{{ url }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Проверить</button>
         </form>
+
+        {% if is_safe is not none %}
+            <div class="result {% if is_safe %}safe{% else %}unsafe{% endif %}">
+                <h5>Результат проверки:</h5>
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
     </div>
 
-    {% if is_safe is not none %}
-        <div class="result {% if is_safe %}safe{% else %}unsafe{% endif %}">
-            <strong>Результат проверки:</strong>
-            <p>{{ message }}</p>
-        </div>
-    {% endif %}
+    <div class="footer">
+        <p>© 2025 Все права защищены.</p>
+        <p>Данный сайт предоставляет проверку безопасности ссылок.</p>
+    </div>
+
+    <!-- Подключение Bootstrap JS и зависимостей -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zyA7rWv/2W1vAL5Z49zN6j6ffBz/5R4Gbktdi9V7" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-9oQlP4eQjq3osltIAwIpphKicF56JHkHxTbP/ilhwtjiQIZg94m++A8Wn2fWiTc1w" crossorigin="anonymous"></script>
 </body>
 </html>

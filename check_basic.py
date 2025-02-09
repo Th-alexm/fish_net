@@ -7,7 +7,9 @@ KNOWN_PAYMENT_SERVICES = ["yookassa.ru", "tinkoff.ru", "qiwi.com", "pay.pochta.r
 
 # Функция для проверки, является ли домен известным
 def is_known_payment_service(domain):
-    return domain in KNOWN_PAYMENT_SERVICES
+    known_services = ["yookassa", "tinkoff", "qiwi", "pay", "sberbank"]
+    return any(service in domain for service in known_services)
+
 
 # Функция для проверки домена
 def check_domain(url):
