@@ -1,6 +1,6 @@
 import sqlite3
 from datetime import datetime
-
+import logging
 # Инициализация БД и таблицы (если еще не существует)
 def create_db():
     conn = sqlite3.connect('checked_domains.db')  # Используем только checked_domains.db
@@ -57,3 +57,9 @@ def get_result(domain):
             'checked_at': result[2]
         }
     return None
+
+#Настройка логирования 
+logging.basicConfig(filename= "logs.txt", level= logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def log_check(domain, result, message):
+    logging.info(f"Domain: {domain}, Result: {result}, Message: {message}")
