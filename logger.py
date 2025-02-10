@@ -8,11 +8,15 @@ if not os.path.exists(log_dir):
 
 log_file = os.path.join(log_dir, "logs.txt")
 
-# Настройка логирования
 logging.basicConfig(
-    filename=log_file,  # Путь к файлу лога
-    level=logging.INFO,  # Уровень логирования (INFO - все сообщения, WARNING - только предупреждения и ошибки)
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    filename=log_file,
+    filemode='a',  # Добавлять логи к файлу, а не затирать его
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file),  # Запись в файл
+        logging.StreamHandler()         # Запись в консоль
+    ]
 )
 
 def log_check(domain, result, message):
