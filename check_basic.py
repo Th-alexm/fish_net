@@ -45,3 +45,18 @@ def check_https(url):
         return True, "Ссылка использует HTTPS."
     else:
         return False, "URL не использует HTTPS. Это может быть опасным."
+
+# Функция для проверки длины домена
+def check_domain_length(url):
+    """Проверяет длину домена."""
+    parsed_url = urlparse(url)
+    domain = parsed_url.netloc
+
+    # Проверяем длину домена
+    domain_length = len(domain)
+    if domain_length < 3:
+        return False, "Домен слишком короткий. Это может быть фишинг."
+    elif domain_length > 253:
+        return False, "Домен слишком длинный. Это может быть подозрительным."
+    
+    return True, "Домен имеет нормальную длину."
