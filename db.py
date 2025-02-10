@@ -21,7 +21,19 @@ def create_db():
     conn.close()
     
 # Функция для добавления результата в БД
-
+def insert_result(domain, result, message):
+    conn = sqlite3.connect('checked_domains.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+    INSERT INTO domain_check_results (domain, result, message, checked_at)
+    VALUES (?, ?, ?, ?)
+    ''', (domain, result, message, datetime.now()))
+    
+    conn.commit()
+    conn.close()
+    
+# Функция для получения результата из базы данных по домену
 def get_result(domain):
     conn = sqlite3.connect('phishing_detection.db')
     cursor = conn.cursor()
