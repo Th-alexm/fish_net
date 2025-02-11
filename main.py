@@ -56,7 +56,7 @@ def check_phishing(url):
     
     db_result = get_result(domain)
     if db_result:
-        log_check(domain, db_result['result'], db_result['message'])  * Логируем найденный результат
+        log_check(domain, db_result['result'], db_result['message'])  # Логируем найденный результат
         return db_result['result'], db_result['message']  
 
     # Если результата нет в базе, проводим проверку
